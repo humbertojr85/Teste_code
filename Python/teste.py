@@ -96,33 +96,52 @@
 # for menor in menor_idade:
 #     print(menor)
 
-def fatorial(valor, show=False):
-    if valor < 0:
+#Teste Fatorial:
+
+# def fatorial(valor, show=False):
+#     if valor < 0:
+#         return -1
+#     if valor == 0:
+#         return 1
+
+#     resultado = 1
+#     for n in range(valor, 0, -1):
+#         resultado = resultado*n
+#         if show:
+#             if n == 1:
+#                 print(f'{n} = {resultado}')
+#             else:
+#                 print(f'{n} x ',end='')
+
+#     return resultado
+
+# def main():
+#     try:
+#         numero = int(input("Digite um numero para o calculo de fatorial: "))
+#         resultado = fatorial(numero, show=True)
+#         if resultado == -1:
+#             print("Fatorial não existe")
+#         else:
+#             print(f"O fatorial de {numero} é {resultado}")
+#     except ValueError:
+#         print("O valor digitado não é um numero")
+
+# main()
+
+
+def fatorial(numero):
+    if numero < 1:
         return -1
-    if valor == 0:
+    if numero == 1:
         return 1
+    return numero * fatorial(numero-1)
 
-    resultado = 1
-    for n in range(valor, 0, -1):
-        resultado = resultado*n
-        if show:
-            if n == 1:
-                print(f'{n} = {resultado}')
-            else:
-                print(f'{n} x ',end='')
-
-    return resultado
-
-def main():
-    try:
-        numero = int(input("Digite um numero para o calculo de fatorial: "))
-        resultado = fatorial(numero, show=True)
-        if resultado == -1:
-            print("Fatorial não existe")
-        else:
-            print(f"O fatorial de {numero} é {resultado}")
-    except ValueError:
-        print("O valor digitado não é um numero")
-
-
-main()
+try:
+    num = int(input('Digite um número para calcula o seu fatorial: '))
+    resultado = fatorial(num)
+    if resultado <= 0:
+        print(f'Fatorial não existe')
+    else:
+        print(f'O Fatorial de {num} é {resultado}')
+except ValueError:
+    print('O Valor digitado não é um número')
