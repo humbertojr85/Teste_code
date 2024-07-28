@@ -1,0 +1,12 @@
+casa
+mesa
+bola
+cadeira
+banco
+rua
+avenida
+tijolo
+pipa
+prato
+viola
+python
