@@ -1,6 +1,3 @@
-print('-='*30)
-print('SEQUÊNCIA DE FIBONACCI')
-print('-='*30)
 
 # num = int(input('Digite um numero para saber se ele está na sequência de Fibonacci: '))
 
@@ -35,22 +32,30 @@ def fibonacci(numero):
     else:
         return fibonacci(numero - 1) + fibonacci(numero - 2)
 
-num = int(input('Digite um numero para saber se ele está na sequência de Fibonacci: '))
+def main():
 
-print('-='*30)
+    print('-='*30)
+    print('SEQUÊNCIA DE FIBONACCI')
+    print('-='*30)
+    
+    num = int(input('Digite um numero para saber se ele está na sequência de Fibonacci: '))
+    print('-='*30)
 
-# Imprimir a sequência de Fibonacci até encontrar o número ou ultrapassá-lo
-contador = 0
-while True:
-    fib = fibonacci(contador)
-    print(f'{fib}', end=' -> ')
-    if fib == num:
-        print(f'\nO {num} está na sequência de Fibonacci')
-        print('-='*30)
-        break
-    elif fib > num:
-        print('FIM')
-        print(f'O {num} não está na sequência de Fibonacci')
-        print('-='*30)
-        break
-    contador += 1
+    # Imprimir a sequência de Fibonacci até encontrar o número ou ultrapassá-lo
+    contador = 0
+    while True:
+        fib = fibonacci(contador)
+        print(f'{fib}', end=' -> ')
+        if fib == num:
+            print(f'\nO {num} está na sequência de Fibonacci')
+            print('-='*30)
+            break
+        elif fib > num:
+            print('FIM')
+            print(f'O {num} não está na sequência de Fibonacci')
+            print('-='*30)
+            break
+        contador += 1
+
+
+main()
