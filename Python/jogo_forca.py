@@ -10,9 +10,11 @@ letras_usuario = []
 letras_erradas = []
 chances = 5
 ganhou = False
+nike = ''
 
 print('       ','\033[1;31;41mJOGO DA FORCA\033[m')
 print('-='*30)
+nike = str(input('Digite seu Nome para Jogar: '))
 
 while True:
     #Criar a logica
@@ -22,6 +24,7 @@ while True:
         else:
             print(' _ ', end=' ')
     print('\n','-='*30)
+    print(f'Olá, {nike}, tenha um ótimo Jogo!')
     palpite_letra = str(input('Digite uma letra para adivinhar a palavra: '))
     letras_usuario.append(palpite_letra.lower())
     
