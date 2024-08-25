@@ -1,4 +1,4 @@
-from conta import Conta
+from POO.Banco.conta import Conta
 
 
 def main():
