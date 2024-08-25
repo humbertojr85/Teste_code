@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class Conta:
     def __init__(self, titular, saldo=0, senha=123):
         self.titular = titular
@@ -14,7 +17,7 @@ class Conta:
         else:
             print('Senha incorreta!')
 
-    def extrato(self):
+    def mostrar_extrato(self):
         sen = int(input('Digite a senha para imprimir o Extrato: '))
         if sen == self.senha:
             with open('C:\\Users\\cau-humberto\\Documents\\GitHub\\Teste_code\\POO\\extrato.txt', 'r') as arquivo:
@@ -55,3 +58,30 @@ class Conta:
         self._saldo = saldo
         self._senha = senha
         print('Conta cadastrada com sucesso!')
+
+
+    def salvar_extrato(self):
+        valor_saque = int(input('Digite o valor a ser sacado: '))
+        # Verifica se o valor do saque é válido
+        if valor_saque > self._saldo:
+            print("Saldo insuficiente para realizar o saque.")
+            return self._saldo
+
+        # Deduz o valor do saque do saldo
+        self._saldo -= valor_saque
+        
+        # Obtém a data e hora atuais
+        data_hora = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        
+        # Texto a ser gravado no extrato
+        registro = f"Feito em {data_hora} \nTitular: {self.titular}\nSaldo Anterior: {valor_saque + valor_saque} \nSaque: R${valor_saque:.2f} \nSaldo Atual: R${self._saldo:.2f}"
+        
+        # Abre o arquivo extrato.txt e grava o registro
+        try:
+            with open('C:\\Users\\cau-humberto\\Documents\\GitHub\\Teste_code\\POO\\Banco\\extrato.txt', 'a') as arquivo:
+                arquivo.write(registro)
+            print("Saque realizado e registrado no extrato.")
+        except Exception as e:
+            print(f"Erro ao tentar salvar o extrato: {e}")
+        
+        return self._saldo

@@ -71,19 +71,9 @@ def main():
 
     conta = Conta('Humberto', 1000, 111)
     print(f'Titular: {conta.titular} \nSaldo: {conta._saldo}')
-    #conta.sacar()
+    conta.salvar_extrato()
     #print(f'Titular: {conta.titular} \nSaldo: {conta._saldo}')
 
-    print('-='*40)
-    print('Conta Corrente:')
-    contaCorrente = ContaCorrente('Alcantara', 111, 2000, 5000)
-    print(contaCorrente.detalhar_conta())
-
-
-    print('-='*40)
-    print('Conta Poupança:')
-    contaPoupanca = ContaPoupanca('Junior', 111, 10000)
-    print(f'Titular: {contaPoupanca.titular} \nSaldo: {contaPoupanca._saldo}')
 
 
 main()

@@ -1,2 +1,9 @@
+Feito em 2024-08-25 15:46:02 
 Titular: Humberto
-Saldo: R$ 5.000,00
+Saldo Anterior: 480 
+Saque: R$240.00 
+Saldo Atual: R$760.00Feito em 2024-08-25 15:51:16 
+Titular: Humberto
+Saldo Anterior: 24 
+Saque: R$12.00 
+Saldo Atual: R$988.00
