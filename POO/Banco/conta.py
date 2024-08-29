@@ -17,22 +17,12 @@ class Conta:
         else:
             print('Senha incorreta!')
 
-    def mostrar_extrato(self):
-        sen = int(input('Digite a senha para imprimir o Extrato: '))
-        if sen == self.senha:
-            with open('C:\\Users\\cau-humberto\\Documents\\GitHub\\Teste_code\\POO\\extrato.txt', 'r') as arquivo:
-                mensagem = arquivo.readlines()
-            for linha in mensagem:
-                print(linha.strip())
-        else:
-            print('Senha incorreta!')
-
     def depositar(self):
         deposito = float(input(f'Qual o valor do Deposito: '))
         self._saldo += deposito
         print('Deposito realizado com sucesso')
 
-    def sacar(self):
+    def sacar2(self):
         sacar = int(input('Digite o valor a ser sacado: '))
         if sacar > self._saldo:
             print(f'Seu Saldo é {self._saldo}, você não tem saldo suficiente para esse saque, tente um valor menor que seu saldo')
@@ -60,7 +50,7 @@ class Conta:
         print('Conta cadastrada com sucesso!')
 
 
-    def salvar_extrato(self):
+    def sacar(self):
         valor_saque = int(input('Digite o valor a ser sacado: '))
         # Verifica se o valor do saque é válido
         if valor_saque > self._saldo:
@@ -74,7 +64,7 @@ class Conta:
         data_hora = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         
         # Texto a ser gravado no extrato
-        registro = f"Feito em {data_hora} \nTitular: {self.titular}\nSaldo Anterior: {valor_saque + valor_saque} \nSaque: R${valor_saque:.2f} \nSaldo Atual: R${self._saldo:.2f}"
+        registro = f"Feito em {data_hora} \nTitular: {self.titular}\nSaldo Anterior: {valor_saque + valor_saque} \nSaque: R${valor_saque:.2f} \nSaldo Atual: R${self._saldo:.2f} \n----------------------------------------------------------------\n"
         
         # Abre o arquivo extrato.txt e grava o registro
         try:
@@ -85,3 +75,24 @@ class Conta:
             print(f"Erro ao tentar salvar o extrato: {e}")
         
         return self._saldo
+    
+    def mostrar_extrato(self):
+        try:
+            # Abre o arquivo extrato.txt em modo de leitura
+            with open('C:\\Users\\cau-humberto\\Documents\\GitHub\\Teste_code\\POO\\Banco\\extrato.txt', 'r') as arquivo:
+                # Lê todo o conteúdo do arquivo
+                conteudo = arquivo.readlines()
+                
+                # Verifica se o arquivo está vazio
+                if not conteudo:
+                    print("Não há registros no extrato.")
+                else:
+                    # Exibe cada linha do extrato
+                    print("Extrato de Transações:")
+                    for linha in conteudo:
+                        print(linha.strip())  # strip() remove espaços em branco e quebras de linha desnecessárias
+        except FileNotFoundError:
+            print("O arquivo extrato.txt não foi encontrado. Nenhum extrato disponível.")
+        except Exception as e:
+            print(f"Ocorreu um erro ao tentar ler o extrato: {e}")
+
