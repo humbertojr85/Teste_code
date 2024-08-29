@@ -12,6 +12,9 @@ class Animal(ABC):
 
     def movimentar(self):
         print(f'O {self.nome} está se movimentando')
+    
+    def linha(self):
+        print('-='*30)
 
 
 #SubClasse
