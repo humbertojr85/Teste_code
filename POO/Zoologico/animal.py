@@ -1,8 +1,11 @@
+from datetime import datetime
 from abc import abstractmethod,ABC
 
 #Classe Animal:
 
 class Animal(ABC):
+    ano_atual = int(datetime.strftime(datetime.now(), '%Y'))
+
     def __init__(self, nome, idade):
         self.nome = nome
         self.idade = idade
@@ -13,6 +16,9 @@ class Animal(ABC):
     def movimentar(self):
         print(f'O {self.nome} está se movimentando')
     
+    def ano_atual(self):
+        pass
+
     def linha(self):
         print('-='*30)
 
