@@ -129,19 +129,101 @@
 # main()
 
 
-def fatorial(numero):
-    if numero < 1:
-        return -1
-    if numero == 1:
-        return 1
-    return numero * fatorial(numero-1)
+# def fatorial(numero):
+#     if numero < 1:
+#         return -1
+#     if numero == 1:
+#         return 1
+#     return numero * fatorial(numero-1)
 
-try:
-    num = int(input('Digite um número para calcula o seu fatorial: '))
-    resultado = fatorial(num)
-    if resultado <= 0:
-        print(f'Fatorial não existe')
-    else:
-        print(f'O Fatorial de {num} é {resultado}')
-except ValueError:
-    print('O Valor digitado não é um número')
+# try:
+#     num = int(input('Digite um número para calcula o seu fatorial: '))
+#     resultado = fatorial(num)
+#     if resultado <= 0:
+#         print(f'Fatorial não existe')
+#     else:
+#         print(f'O Fatorial de {num} é {resultado}')
+# except ValueError:
+#     print('O Valor digitado não é um número')
+
+import pygame
+import random
+import sys
+
+# Inicializar o Pygame
+pygame.init()
+
+# Dimensões da tela
+LARGURA, ALTURA = 800, 600
+TELA = pygame.display.set_mode((LARGURA, ALTURA))
+pygame.display.set_caption("🎉 Bingo de Final de Ano 🎉")
+
+# Cores
+BRANCO = (255, 255, 255)
+PRETO = (0, 0, 0)
+VERMELHO = (200, 50, 50)
+AMARELO = (255, 200, 0)
+AZUL = (50, 100, 200)
+
+# Fonte
+FONTE_GRANDE = pygame.font.Font(None, 100)
+FONTE_MEDIA = pygame.font.Font(None, 50)
+FONTE_PEQUENA = pygame.font.Font(None, 30)
+
+# Sons
+pygame.mixer.init()
+#SOM_BINGO = pygame.mixer.Sound("chime.wav")  # Coloque o caminho de um som aqui
+
+# Gerar números de bingo
+numeros = list(range(1, 76))
+random.shuffle(numeros)
+numeros_chamados = []
+
+# Função para exibir texto na tela
+def exibir_texto(texto, fonte, cor, x, y):
+    superficie = fonte.render(texto, True, cor)
+    retangulo = superficie.get_rect(center=(x, y))
+    TELA.blit(superficie, retangulo)
+
+# Função principal
+def main():
+    rodando = True
+    numero_atual = None
+
+    while rodando:
+        TELA.fill(BRANCO)
+
+        # Título
+        exibir_texto("🎉 Bingo de Final de Ano 🎉", FONTE_MEDIA, AZUL, LARGURA // 2, 50)
+
+        # Mostrar o número atual
+        if numero_atual is not None:
+            exibir_texto(f"Número: {numero_atual}", FONTE_GRANDE, VERMELHO, LARGURA // 2, ALTURA // 2 - 50)
+
+        # Instruções
+        exibir_texto("Pressione ESPAÇO para chamar o próximo número", FONTE_PEQUENA, PRETO, LARGURA // 2, ALTURA - 100)
+
+        # Números chamados
+        exibir_texto("Números chamados:", FONTE_PEQUENA, AZUL, LARGURA // 2, ALTURA - 250)
+        exibir_texto(", ".join(map(str, numeros_chamados[-10:])), FONTE_PEQUENA, PRETO, LARGURA // 2, ALTURA - 200)
+
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                rodando = False
+            if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_SPACE and numeros:
+                    # Chamar o próximo número
+                    numero_atual = numeros.pop(0)
+                    numeros_chamados.append(numero_atual)
+                    #SOM_BINGO.play()
+                elif not numeros:
+                    exibir_texto("Todos os números foram chamados!", FONTE_PEQUENA, VERMELHO, LARGURA // 2, ALTURA - 150)
+
+        pygame.display.flip()
+
+    pygame.quit()
+    sys.exit()
+
+# Executar o programa
+if __name__ == "__main__":
+    main()
