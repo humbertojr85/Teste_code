@@ -7,12 +7,12 @@ import pyttsx3
 voz = pyttsx3.init()
 
 # Configurar a voz (opcional)
-voz.setProperty('rate', 150)  # Velocidade da fala
-voz.setProperty('volume', 1.0)  # Volume (1.0 = máximo)
+voz.setProperty('rate', 200)  # Velocidade da fala
+voz.setProperty('volume', 2.0)  # Volume (1.0 = máximo)
 
 # Função para falar o número sorteado
 def falar_numero(numero):
-    texto = f"O número sorteado é {numero}"
+    texto = f"Bola número {numero}"
     voz.say(texto)
     voz.runAndWait()
 
@@ -20,7 +20,7 @@ def falar_numero(numero):
 pygame.init()
 
 # Dimensões da tela
-LARGURA, ALTURA = 1024, 768
+LARGURA, ALTURA = 800, 600
 TELA = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption("🎉 O melhor Jogo de Bingo Feito por Humberto 🎉")
 
@@ -40,23 +40,19 @@ FONTE_GRANDE = pygame.font.Font(None, 150)
 FONTE_MEDIA = pygame.font.Font(None, 70)
 FONTE_PEQUENA = pygame.font.Font(None, 40)
 
-# Música de fundo
-pygame.mixer.music.load("C:/Users/humberto/Documents/Softex - FAP turma 15/Teste_code/Python/audio/fundo2.mp3")  # Substitua pelo nome do arquivo de música
-pygame.mixer.music.set_volume(0.5)  # Controle o volume (0.0 a 1.0)
-pygame.mixer.music.play(-1)  # -1 para tocar em loop
-
-
 # Sons
 pygame.mixer.init()
-SOM_BINGO = pygame.mixer.Sound("C:/Users/humberto/Documents/Softex - FAP turma 15/Teste_code/Python/audio/sweep.mp3")  # Substitua pelo caminho de um som
-SOM_FOGOS = pygame.mixer.Sound("C:/Users/humberto/Documents/Softex - FAP turma 15/Teste_code/Python/audio/fogos.mp3")  # Substitua pelo caminho de outro som
+SOM_FUNDO = pygame.mixer.music.load("audio/fundo3.mp3")
+SOM_FUNDO = pygame.mixer.music.play(-1)
+SOM_BINGO = pygame.mixer.Sound("audio/ding.mp3")
+SOM_FOGOS = pygame.mixer.Sound("audio/fogos.mp3")
 
 # Imagem de fundo
-IMAGEM_FUNDO = pygame.image.load("C:/Users/humberto/Documents/Softex - FAP turma 15/Teste_code/Python/imagem/imagem.jpg")  # Substitua pelo caminho da imagem
+IMAGEM_FUNDO = pygame.image.load("imagem/imagem.jpg")  # Substitua pelo caminho da imagem
 IMAGEM_FUNDO = pygame.transform.scale(IMAGEM_FUNDO, (LARGURA, ALTURA))
 
 # Gerar números de bingo
-numeros = list(range(1, 76))
+numeros = list(range(1, 99))
 random.shuffle(numeros)
 numeros_chamados = []
 
@@ -87,11 +83,11 @@ def main():
             TELA.blit(IMAGEM_FUNDO, (0, 0))  # Exibir imagem de fundo
 
         # Título
-        exibir_texto("🎉 Bingo de Final de Ano 🎉", FONTE_MEDIA, AZUL, LARGURA // 2, 50)
+        exibir_texto("Bingo de Final de Ano", FONTE_MEDIA, PRETO, LARGURA // 2, 350)
 
         if ganhador:
             # Exibir a última bola chamada em destaque
-            exibir_texto(f"Última bola: {numero_atual}", FONTE_GRANDE, VERMELHO, LARGURA // 2, 200)
+            exibir_texto(f"Última bola: {numero_atual}", FONTE_GRANDE, VERMELHO, LARGURA // 2, 290)
 
             # Listar as demais bolas chamadas abaixo
             y_pos = 350
@@ -110,10 +106,10 @@ def main():
         else:
             # Mostrar o número atual
             if numero_atual is not None:
-                exibir_texto(f"Número: {numero_atual}", FONTE_GRANDE, VERMELHO, LARGURA // 2, 150)
+                exibir_texto(f"Bola: {numero_atual}", FONTE_MEDIA, VERMELHO, LARGURA // 2, 400)
 
             # Mostrar todos os números chamados
-            y_pos = 250
+            y_pos = 450
             x_pos = 50
             for i, numero in enumerate(numeros_chamados):
                 cor = VERMELHO if numero == numero_atual else PRETO
@@ -124,7 +120,7 @@ def main():
                     y_pos += 40
 
             # Instruções
-            exibir_texto("ESPAÇO p/ chamar o próximo número ou ENTER para ganhador", FONTE_PEQUENA, PRETO, LARGURA // 2, ALTURA - 50)
+            #exibir_texto("ESPAÇO p/ chamar o próximo número ou ENTER p/ ganhador", FONTE_PEQUENA, PRETO, LARGURA // 2, ALTURA - 50)
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
