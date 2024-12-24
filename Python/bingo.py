@@ -1,6 +1,20 @@
 import pygame
 import random
 import sys
+import pyttsx3
+
+# Inicializar o mecanismo de texto para fala
+voz = pyttsx3.init()
+
+# Configurar a voz (opcional)
+voz.setProperty('rate', 150)  # Velocidade da fala
+voz.setProperty('volume', 1.0)  # Volume (1.0 = máximo)
+
+# Função para falar o número sorteado
+def falar_numero(numero):
+    texto = f"O número sorteado é {numero}"
+    voz.say(texto)
+    voz.runAndWait()
 
 # Inicializar o Pygame
 pygame.init()
@@ -32,7 +46,7 @@ pygame.mixer.init()
 #SOM_FOGOS = pygame.mixer.Sound("fireworks.wav")  # Substitua pelo caminho de outro som
 
 # Imagem de fundo
-IMAGEM_FUNDO = pygame.image.load("imagem/imagem.jpg")  # Substitua pelo caminho da imagem
+IMAGEM_FUNDO = pygame.image.load("C:/Users/humberto/Documents/Softex - FAP turma 15/Teste_code/Python/imagem/imagem.jpg")  # Substitua pelo caminho da imagem
 IMAGEM_FUNDO = pygame.transform.scale(IMAGEM_FUNDO, (LARGURA, ALTURA))
 
 # Gerar números de bingo
@@ -115,6 +129,9 @@ def main():
                     numero_atual = numeros.pop(0)
                     numeros_chamados.append(numero_atual)
                     #SOM_BINGO.play()
+
+                    # Falar o número sorteado
+                    falar_numero(numero_atual)
                 elif evento.key == pygame.K_RETURN and numero_atual is not None:
                     # Declarar ganhador
                     ganhador = True
