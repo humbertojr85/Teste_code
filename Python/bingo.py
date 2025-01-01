@@ -12,9 +12,14 @@ voz.setProperty('volume', 2.0)  # Volume (1.0 = máximo)
 
 # Função para falar o número sorteado
 def falar_numero(numero):
-    texto = f"Bola número {numero}"
+    if numero % 10 == 0:
+        texto = f"De Rombo {numero}"
+    else:
+        texto = f"Bola número {numero}"
+    pygame.mixer.music.stop()
     voz.say(texto)
     voz.runAndWait()
+    pygame.mixer.music.play(-1)
 
 # Inicializar o Pygame
 pygame.init()
@@ -52,7 +57,7 @@ IMAGEM_FUNDO = pygame.image.load("imagem/imagem.jpg")  # Substitua pelo caminho 
 IMAGEM_FUNDO = pygame.transform.scale(IMAGEM_FUNDO, (LARGURA, ALTURA))
 
 # Gerar números de bingo
-numeros = list(range(1, 99))
+numeros = list(range(1, 90))
 random.shuffle(numeros)
 numeros_chamados = []
 
@@ -137,7 +142,7 @@ def main():
                 elif evento.key == pygame.K_RETURN and numero_atual is not None:
                     # Declarar ganhador
                     ganhador = True
-                    
+                    pygame.mixer.music.stop()
                     SOM_FOGOS.play()
                 elif evento.key == pygame.K_ESCAPE and ganhador:
                     # Sair após ganhador
